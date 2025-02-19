@@ -4,7 +4,7 @@ import { PrismaClient, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 class UserService implements IUserService {
-  private _prisma: PrismaClient;
+  private readonly _prisma: PrismaClient;
 
   constructor(prisma: PrismaClient) {
     this._prisma = prisma;

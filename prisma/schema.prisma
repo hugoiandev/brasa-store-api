@@ -37,7 +37,7 @@ model User {
   email String @db.VarChar(100) @unique
   password_hash String @db.VarChar(255)
   phone_number String? @db.VarChar(20) @unique
-  rule UserRole @default(USER)
+  role UserRole @default(USER)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt @default(now())
 

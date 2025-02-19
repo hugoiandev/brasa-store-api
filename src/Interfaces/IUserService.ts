@@ -1,5 +1,4 @@
 import CreateUserDto from "../Dtos/CreateUserDto";
-import { User } from "@prisma/client";
 
 interface IUserService {
   createUser(
