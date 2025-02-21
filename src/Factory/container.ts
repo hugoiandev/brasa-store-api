@@ -9,6 +9,8 @@ import CategoryService from "../Services/CategoryService";
 import CategoryController from "../Controllers/CategoryController";
 import ProductService from "../Services/ProductService";
 import ProductController from "../Controllers/ProductController";
+import AddressService from "../Services/AddressService";
+import AddressController from "../Controllers/AddressController";
 
 const prisma = new PrismaClient();
 
@@ -34,9 +36,15 @@ const createProductController = () => {
   return new ProductController(productService);
 };
 
+const createAddressController = () => {
+  const addressService = new AddressService(prisma);
+  return new AddressController(addressService);
+};
+
 export {
   createUserController,
   createAuthController,
   createCategoryController,
   createProductController,
+  createAddressController,
 };
