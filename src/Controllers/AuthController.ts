@@ -11,7 +11,7 @@ class AuthController {
     this._authService = authService;
   }
 
-  async login(req: Request<{}, {}, LoginDto>, res: Response) {
+  public async login(req: Request<{}, {}, LoginDto>, res: Response) {
     const loginSchema = Yup.object().shape({
       email: Yup.string()
         .email("Digite um email válido.")

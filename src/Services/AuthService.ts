@@ -11,7 +11,7 @@ class AuthService implements IAuthService {
     this._prisma = prisma;
   }
 
-  async loginUser(user: LoginDto): Promise<string> {
+  public async loginUser(user: LoginDto): Promise<string> {
     const response = await this._prisma.user.findUnique({
       where: {
         email: user.email,

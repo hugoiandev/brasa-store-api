@@ -14,16 +14,19 @@ const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
 
   const jwtSecret = process.env.JWT_SECRET as string;
 
-  const tokenIsValid = jwt.verify(token, jwtSecret);
+  try {
+    jwt.verify(token, jwtSecret);
 
-  if (!tokenIsValid) {
-    res
-      .status(403)
-      .json(new ResponseModel({ message: "Acesso negado, token inválido." }));
+    next();
+  } catch (err) {
+    res.status(403).json(
+      new ResponseModel({
+        message: "Acesso negado, token inválido.",
+        success: false,
+      })
+    );
     return;
   }
-
-  next();
 };
 
 export default authenticateToken;

@@ -13,8 +13,8 @@ CREATE TABLE "users" (
     "name" VARCHAR(100) NOT NULL,
     "email" VARCHAR(100) NOT NULL,
     "password_hash" VARCHAR(255) NOT NULL,
-    "number_phone" VARCHAR(20) NOT NULL,
-    "rule" "UserRole" NOT NULL DEFAULT 'USER',
+    "phone_number" VARCHAR(20),
+    "role" "UserRole" NOT NULL DEFAULT 'USER',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -137,7 +137,7 @@ CREATE TABLE "payments" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "users_number_phone_key" ON "users"("number_phone");
+CREATE UNIQUE INDEX "users_phone_number_key" ON "users"("phone_number");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "shoppingcarts_user_id_key" ON "shoppingcarts"("user_id");
