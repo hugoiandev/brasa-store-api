@@ -4,6 +4,7 @@ import {
   createAuthController,
   createCategoryController,
   createProductController,
+  createAddressController,
 } from "./Factory/container";
 import authenticateToken from "./Middlewares/auth";
 import isAdmin from "./Middlewares/admin";
@@ -15,9 +16,15 @@ const userController = createUserController();
 const authController = createAuthController();
 const categoryController = createCategoryController();
 const productController = createProductController();
+const addressController = createAddressController();
 
 routes.post("/api/users", (req, res) => userController.create(req, res));
 routes.post("/api/auth/login", (req, res) => authController.login(req, res));
+
+routes.post("/api/users/address", authenticateToken, (req, res) =>
+  addressController.create(req, res)
+);
+
 routes.post("/api/admin/categories", authenticateToken, isAdmin, (req, res) =>
   categoryController.create(req, res)
 );
