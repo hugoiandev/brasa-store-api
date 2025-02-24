@@ -31,7 +31,7 @@ class AddressController {
 
       await this._addressService.createAddress({
         ...address,
-        userId: userPayload.id,
+        user_id: userPayload.id,
       });
 
       res

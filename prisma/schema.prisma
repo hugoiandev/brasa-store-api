@@ -34,8 +34,8 @@ model Address {
   state        String   @db.VarChar(2)
   zip_code     String   @db.VarChar(45)
   default      Boolean? @default(false)
-  userId       Int
-  user         User     @relation(fields: [userId], references: [id])
+  user_id      Int
+  user         User     @relation(fields: [user_id], references: [id])
   orders       Order[]
 
   @@map("addresses")

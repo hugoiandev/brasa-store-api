@@ -25,7 +25,7 @@ class CreateProductDto {
   }) {
     this.name = name;
     this.description = description;
-    this.price = Number.parseFloat(price);
+    this.price = Number(price);
     this.stock = Number(stock);
     this.category_id = Number(category_id);
     this.file = file;

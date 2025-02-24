@@ -12,7 +12,7 @@ class AddressService implements IAddressService {
   async createAddress(address: CreateAddressDto): Promise<void> {
     const userAddress = await this._prisma.address.findMany({
       where: {
-        userId: address.userId,
+        user_id: address.user_id,
       },
     });
 

@@ -6,7 +6,7 @@ interface CreateAddressDto {
   city: string;
   state: string;
   zip_code: string;
-  userId: number;
+  user_id: number;
 }
 
 export default CreateAddressDto;
