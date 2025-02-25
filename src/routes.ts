@@ -10,6 +10,7 @@ import {
   createWishListController,
   createWishListItemController,
   createOrderStatusController,
+  createOrderController,
 } from "./Factory/container";
 import authenticateToken from "./Middlewares/auth";
 import isAdmin from "./Middlewares/admin";
@@ -27,6 +28,7 @@ const shoppingCartItemController = createShoppingCartItemController();
 const wishListController = createWishListController();
 const wishListItemController = createWishListItemController();
 const orderStatusController = createOrderStatusController();
+const OrderController = createOrderController();
 
 routes.post("/api/users", (req, res) => userController.create(req, res));
 routes.post("/api/auth/login", (req, res) => authController.login(req, res));
@@ -49,6 +51,10 @@ routes.post("/api/users/wishlists", authenticateToken, (req, res) =>
 
 routes.post("/api/users/wishlistitens", authenticateToken, (req, res) =>
   wishListItemController.create(req, res)
+);
+
+routes.post("/api/users/orders", authenticateToken, (req, res) =>
+  orderStatusController.create(req, res)
 );
 
 routes.post("/api/admin/categories", authenticateToken, isAdmin, (req, res) =>

@@ -21,6 +21,8 @@ import WishListItemService from "../Services/WishListItemService";
 import WishListItemController from "../Controllers/WishListItemController";
 import OrderStatusService from "../Services/OrderStatusService";
 import OrderStatusController from "../Controllers/OrderStatusController";
+import OrderService from "../Services/OrderService";
+import OrderController from "../Controllers/OrderController";
 
 const prisma = new PrismaClient();
 
@@ -76,6 +78,11 @@ const createOrderStatusController = () => {
   return new OrderStatusController(orderStatusService);
 };
 
+const createOrderController = () => {
+  const orderService = new OrderService(prisma);
+  return new OrderController(orderService);
+};
+
 export {
   createUserController,
   createAuthController,
@@ -87,4 +94,5 @@ export {
   createWishListController,
   createWishListItemController,
   createOrderStatusController,
+  createOrderController,
 };
