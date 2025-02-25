@@ -13,8 +13,10 @@ import AddressService from "../Services/AddressService";
 import AddressController from "../Controllers/AddressController";
 import ShoppingCartService from "../Services/ShoppingCartService";
 import ShoppingCartController from "../Controllers/ShoppingCartController";
-import ShoppingCartItemService from "../Services/ShoppingCartItem";
+import ShoppingCartItemService from "../Services/ShoppingCartItemService";
 import ShoppingCartItemController from "../Controllers/ShoppingCartItemController";
+import WishListService from "../Services/WishListService";
+import WishListController from "../Controllers/WishListController";
 
 const prisma = new PrismaClient();
 
@@ -55,6 +57,11 @@ const createShoppingCartItemController = () => {
   return new ShoppingCartItemController(shoppingCartItemService);
 };
 
+const createWishListController = () => {
+  const wishListService = new WishListService(prisma);
+  return new WishListController(wishListService);
+};
+
 export {
   createUserController,
   createAuthController,
@@ -63,4 +70,5 @@ export {
   createAddressController,
   createShoppingCartController,
   createShoppingCartItemController,
+  createWishListController,
 };
