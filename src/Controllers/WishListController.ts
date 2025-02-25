@@ -30,7 +30,7 @@ class WishListController {
           new ResponseModel({ message: "Lista de desejo criada com sucesso." })
         );
       return;
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof Yup.ValidationError) {
         res.status(400).json(
           new ResponseModel({
@@ -42,9 +42,13 @@ class WishListController {
         return;
       }
 
-      res
-        .status(500)
-        .json(new ResponseModel({ message: "Ocorreu um erro interno." }));
+      res.status(500).json(
+        new ResponseModel({
+          message: "Ocorreu um erro interno.",
+          success: false,
+          errors: error.message,
+        })
+      );
     }
   }
 }
