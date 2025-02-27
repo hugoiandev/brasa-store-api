@@ -11,10 +11,6 @@ import ProductService from "../Services/ProductService";
 import ProductController from "../Controllers/ProductController";
 import AddressService from "../Services/AddressService";
 import AddressController from "../Controllers/AddressController";
-import ShoppingCartService from "../Services/ShoppingCartService";
-import ShoppingCartController from "../Controllers/ShoppingCartController";
-import ShoppingCartItemService from "../Services/ShoppingCartItemService";
-import ShoppingCartItemController from "../Controllers/ShoppingCartItemController";
 import WishListService from "../Services/WishListService";
 import WishListController from "../Controllers/WishListController";
 import WishListItemService from "../Services/WishListItemService";
@@ -53,16 +49,6 @@ const createAddressController = () => {
   return new AddressController(addressService);
 };
 
-const createShoppingCartController = () => {
-  const shoppingCartService = new ShoppingCartService(prisma);
-  return new ShoppingCartController(shoppingCartService);
-};
-
-const createShoppingCartItemController = () => {
-  const shoppingCartItemService = new ShoppingCartItemService(prisma);
-  return new ShoppingCartItemController(shoppingCartItemService);
-};
-
 const createWishListController = () => {
   const wishListService = new WishListService(prisma);
   return new WishListController(wishListService);
@@ -89,8 +75,6 @@ export {
   createCategoryController,
   createProductController,
   createAddressController,
-  createShoppingCartController,
-  createShoppingCartItemController,
   createWishListController,
   createWishListItemController,
   createOrderStatusController,

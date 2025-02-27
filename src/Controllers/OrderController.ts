@@ -14,8 +14,8 @@ class OrderController {
 
   async create(req: Request<{}, {}, CreateOrderDto>, res: Response) {
     const orderSchema = Yup.object().shape({
-      orderstatus_id: Yup.number().required(),
       address_id: Yup.number().required(),
+      itens: Yup.array().of(Yup.object()),
     });
 
     const token = req.headers.authorization as string;
