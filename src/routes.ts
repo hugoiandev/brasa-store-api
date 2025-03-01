@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import {
   createUserController,
   createAuthController,
@@ -7,7 +7,6 @@ import {
   createAddressController,
   createWishListController,
   createWishListItemController,
-  createOrderStatusController,
   createOrderController,
 } from "./Factory/container";
 import authenticateToken from "./Middlewares/auth";
@@ -23,7 +22,6 @@ const productController = createProductController();
 const addressController = createAddressController();
 const wishListController = createWishListController();
 const wishListItemController = createWishListItemController();
-const orderStatusController = createOrderStatusController();
 const orderController = createOrderController();
 
 routes.post("/api/users", (req, res) => userController.create(req, res));
@@ -49,16 +47,16 @@ routes.post("/api/admin/categories", authenticateToken, isAdmin, (req, res) =>
   categoryController.create(req, res)
 );
 
-routes.post("/api/admin/orderstatus", authenticateToken, isAdmin, (req, res) =>
-  orderStatusController.create(req, res)
-);
-
 routes.post(
   "/api/admin/products",
   authenticateToken,
   isAdmin,
   upload.single("photo"),
   (req, res) => productController.create(req, res)
+);
+
+routes.get("/api/users/products", authenticateToken, (req, res) =>
+  productController.get(req, res)
 );
 
 export default routes;

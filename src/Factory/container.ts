@@ -15,8 +15,6 @@ import WishListService from "../Services/WishListService";
 import WishListController from "../Controllers/WishListController";
 import WishListItemService from "../Services/WishListItemService";
 import WishListItemController from "../Controllers/WishListItemController";
-import OrderStatusService from "../Services/OrderStatusService";
-import OrderStatusController from "../Controllers/OrderStatusController";
 import OrderService from "../Services/OrderService";
 import OrderController from "../Controllers/OrderController";
 
@@ -59,11 +57,6 @@ const createWishListItemController = () => {
   return new WishListItemController(wishListItemService);
 };
 
-const createOrderStatusController = () => {
-  const orderStatusService = new OrderStatusService(prisma);
-  return new OrderStatusController(orderStatusService);
-};
-
 const createOrderController = () => {
   const orderService = new OrderService(prisma);
   return new OrderController(orderService);
@@ -77,6 +70,5 @@ export {
   createAddressController,
   createWishListController,
   createWishListItemController,
-  createOrderStatusController,
   createOrderController,
 };
