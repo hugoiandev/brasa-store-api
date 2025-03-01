@@ -3,9 +3,7 @@ import CreateOrderDto from "../Dtos/CreateOrderDto";
 import IOrderService from "../Interfaces/IOrderService";
 import Stripe from "stripe";
 
-const stripe: Stripe = require("stripe")(
-  "sk_test_51QwGySFPedOpaV08cSPScToc49ubxlshkXVCLxyobbyBUnyEEgc5hU8aeDW7EXG4kguuyioyis2YrNBNpS9wn1qH00LfdHsdDO"
-);
+const stripe: Stripe = require("stripe")(process.env.STRAPI_KEY_DEV);
 class OrderService implements IOrderService {
   private readonly _prisma: PrismaClient;
 
