@@ -14,8 +14,8 @@ class OrderController {
 
   async create(req: Request<{}, {}, CreateOrderDto>, res: Response) {
     const orderSchema = Yup.object().shape({
-      orderstatus_id: Yup.number().required(),
       address_id: Yup.number().required(),
+      itens: Yup.array().of(Yup.object()),
     });
 
     const token = req.headers.authorization as string;
@@ -26,11 +26,14 @@ class OrderController {
     try {
       await orderSchema.validate(order);
 
-      await this._orderService.createOrder({ ...order, user_id: user.id });
+      const response = await this._orderService.createOrder({
+        ...order,
+        user_id: user.id,
+      });
 
-      res
-        .status(200)
-        .json(new ResponseModel({ message: "Pedido criado com sucesso." }));
+      console.log(response.url);
+
+      res.redirect(303, response.url as string);
       return;
     } catch (error: any) {
       if (error instanceof Yup.ValidationError) {

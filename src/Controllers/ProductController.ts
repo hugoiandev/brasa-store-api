@@ -58,6 +58,31 @@ class ProductController {
       return;
     }
   }
+
+  public async get(req: Request, res: Response) {
+    try {
+      const response = await this._productService.getProducts();
+
+      res.status(200).json(
+        new ResponseModel({
+          message: "Produtos obtidos com sucesso.",
+          data: response,
+        })
+      );
+      return;
+    } catch (error: any) {
+      res
+        .status(500)
+        .json(
+          new ResponseModel({
+            message: "Ocorreu um erro interno.",
+            success: false,
+            errors: error.message,
+          })
+        );
+      return;
+    }
+  }
 }
 
 export default ProductController;

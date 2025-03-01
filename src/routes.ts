@@ -1,15 +1,12 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import {
   createUserController,
   createAuthController,
   createCategoryController,
   createProductController,
   createAddressController,
-  createShoppingCartController,
-  createShoppingCartItemController,
   createWishListController,
   createWishListItemController,
-  createOrderStatusController,
   createOrderController,
 } from "./Factory/container";
 import authenticateToken from "./Middlewares/auth";
@@ -23,26 +20,15 @@ const authController = createAuthController();
 const categoryController = createCategoryController();
 const productController = createProductController();
 const addressController = createAddressController();
-const shoppingCartController = createShoppingCartController();
-const shoppingCartItemController = createShoppingCartItemController();
 const wishListController = createWishListController();
 const wishListItemController = createWishListItemController();
-const orderStatusController = createOrderStatusController();
-const OrderController = createOrderController();
+const orderController = createOrderController();
 
 routes.post("/api/users", (req, res) => userController.create(req, res));
 routes.post("/api/auth/login", (req, res) => authController.login(req, res));
 
 routes.post("/api/users/address", authenticateToken, (req, res) =>
   addressController.create(req, res)
-);
-
-routes.post("/api/users/shoppingcarts", authenticateToken, (req, res) =>
-  shoppingCartController.create(req, res)
-);
-
-routes.post("/api/users/shoppingcartitens", authenticateToken, (req, res) =>
-  shoppingCartItemController.create(req, res)
 );
 
 routes.post("/api/users/wishlists", authenticateToken, (req, res) =>
@@ -54,15 +40,11 @@ routes.post("/api/users/wishlistitens", authenticateToken, (req, res) =>
 );
 
 routes.post("/api/users/orders", authenticateToken, (req, res) =>
-  orderStatusController.create(req, res)
+  orderController.create(req, res)
 );
 
 routes.post("/api/admin/categories", authenticateToken, isAdmin, (req, res) =>
   categoryController.create(req, res)
-);
-
-routes.post("/api/admin/orderstatus", authenticateToken, isAdmin, (req, res) =>
-  orderStatusController.create(req, res)
 );
 
 routes.post(
@@ -71,6 +53,10 @@ routes.post(
   isAdmin,
   upload.single("photo"),
   (req, res) => productController.create(req, res)
+);
+
+routes.get("/api/users/products", authenticateToken, (req, res) =>
+  productController.get(req, res)
 );
 
 export default routes;

@@ -2,6 +2,7 @@ import { PrismaClient, Product } from "@prisma/client";
 import IS3Service from "../Interfaces/IS3Service";
 import IProductService from "../Interfaces/IProductService";
 import CreateProductDto from "../Dtos/CreateProductDto";
+import { Request, Response } from "express";
 
 class ProductService implements IProductService {
   private readonly _prisma: PrismaClient;
@@ -41,6 +42,12 @@ class ProductService implements IProductService {
     }
 
     return productResponse;
+  }
+
+  public async getProducts() {
+    const products = await this._prisma.product.findMany();
+
+    return products;
   }
 }
 
